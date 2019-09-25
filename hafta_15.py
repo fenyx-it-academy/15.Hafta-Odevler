@@ -29,18 +29,17 @@ while len(arr)>0:
 #nonDivisibleSubset
 arr1=list(map(int,input().strip().split()))
 arr2=list(map(int,input().strip().split()))
-def nonDivisibleSubset(k, arr):
-    length = len(arr)
-    remainders = [0] * k
-    for value in arr:
-        remainders[value % k] += 1
-    result = 0
-    for a in range(1, (k + 1) // 2):
-        result += max(remainders[a], remainders[k - a])
-    if k % 2 == 0 and remainders[k // 2]:
-        result += 1
-    if remainders[0]:
-        result += 1
-    return result
+def nonDivisible(k,arr):
+    f = [0]*k
+    res=0
+    for i in range(len(arr)):
+        f[arr[i] % k] += 1
+    if (k% 2 == 0) and f[k/ 2]:
+        res +=1
+    if f[0]:
+        res +=1
+    for i in range(1, (k // 2) + 1):
+        res += max(f[i], f[k - i])
+    return res
 
-print(nonDivisibleSubset(arr1[1], arr2))
+print(nonDivisible(arr1[1], arr2))
